@@ -1,0 +1,14 @@
+{
+    "name": "ojooss/homee-api",
+    "description": "package to interact with homee",
+    "type": "librara",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Ojooss\\HomeeApi\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^7.4|^8.0"
+    }
+}
