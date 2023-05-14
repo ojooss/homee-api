@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+
+  test:
+    build:
+      context: .
+    image: homee-api:local
+    volumes:
+      - .:/app
+    command: bash -c "composer install  &&  php vendor/bin/phpunit"
+
+  dev:
+    image: homee-api:local
+    environment:
+      HOMEE_HOST: "${HOMEE_HOST}"
+      HOMEE_USERNAME: "${HOMEE_USERNAME}"
+      HOMEE_PASSWORD: "${HOMEE_PASSWORD}"
+    volumes:
+      - .:/app
+    # run interactive bash shell
+    command: bash
+    tty: true
+    stdin_open: true
