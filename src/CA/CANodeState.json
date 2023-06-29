@@ -1,0 +1,19 @@
+{
+  "CANodeState": {
+    "CANodeStateNone": 0,
+    "CANodeStateAvailable": 1,
+    "CANodeStateUnavailable": 2,
+    "CANodeStateUpdateInProgress": 3,
+    "CANodeStateWaitingForAttributes": 4,
+    "CANodeStateInitializing": 5,
+    "CANodeStateUserInteractionRequired": 6,
+    "CANodeStatePasswordRequired": 7,
+    "CANodeStateHostUnavailable": 8,
+    "CANodeStateDeleteInProgress": 9,
+    "CANodeStateCosiConnected": 10,
+    "CANodeStateLocked": 11,
+    "CANodeStateWaitingForWakeup": 12,
+    "CANodeStateRemoteNodeDeleted": 13,
+    "CANodeStateNodeFirmwareUpdateInProgress": 14
+  }
+}

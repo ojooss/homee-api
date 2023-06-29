@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace HomeeApi\CA;
 
-class CADeviceType
+class CADeviceType extends CA
 {
     public const CADeviceTypeNone = 0;
     public const CADeviceTypePhone = 1;
@@ -12,13 +12,11 @@ class CADeviceType
     public const CADeviceTypeDesktop = 3;
     public const CADeviceTypeBrowser = 4;
 
-    public static function get(string $key): ?int
-    {
-        $name = static::class . '::' . $key;
-        if (defined($name)) {
-            return constant($name);
-        } else {
-            return null;
-        }
-    }
+    protected static array $mapping = [
+        0 => 'None',
+        1 => 'Phone',
+        2 => 'Tablet',
+        3 => 'Desktop',
+        4 => 'Browser',
+    ];
 }

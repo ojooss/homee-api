@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace HomeeApi\CA;
 
-class CADeviceApp
+class CADeviceApp extends CA
 {
     public const CADeviceAppNone = 0;
     public const CADeviceAppHomee = 1;
@@ -19,13 +19,18 @@ class CADeviceApp
     public const CADeviceAppQuarZ = 12;
     public const CADeviceAppVARIA3 = 13;
 
-    public static function get(string $key): ?int
-    {
-        $name = static::class . '::' . $key;
-        if (defined($name)) {
-            return constant($name);
-        } else {
-            return null;
-        }
-    }
+    protected static array $mapping = [
+        0 => 'None',
+        1 => 'Homee',
+        2 => 'AFRISOhome',
+        3 => 'ESTMK',
+        4 => 'Coviva',
+        5 => 'PuM',
+        6 => 'CovivaBerker',
+        7 => 'NVB',
+        9 => 'TEN',
+        11 => 'Hoermann',
+        12 => 'QuarZ',
+        13 => 'VARIA3',
+    ];
 }

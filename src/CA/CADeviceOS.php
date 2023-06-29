@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace HomeeApi\CA;
 
-class CADeviceOS
+class CADeviceOS extends CA
 {
     public const CADeviceOSNone = 0;
     public const CADeviceOSiOS = 1;
@@ -14,13 +14,13 @@ class CADeviceOS
     public const CADeviceOSLinux = 5;
     public const CADeviceOSMacOS = 6;
 
-    public static function get(string $key): ?int
-    {
-        $name = static::class . '::' . $key;
-        if (defined($name)) {
-            return constant($name);
-        } else {
-            return null;
-        }
-    }
+    protected static array $mapping = [
+        0 => 'None',
+        1 => 'iOS',
+        2 => 'Android',
+        3 => 'Windows',
+        4 => 'WindowsPhone',
+        5 => 'Linux',
+        6 => 'MacOS',
+    ];
 }
