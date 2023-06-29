@@ -1,0 +1,101 @@
+{
+  "id": 1,
+  "name": "roller_shutter.ground_floor",
+  "image": "homeegramicon_shutter_value_5",
+  "state": 1,
+  "visible": 0,
+  "favorite": 0,
+  "order": 1,
+  "active": 1,
+  "play": 0,
+  "added": 1565352522,
+  "phonetic_name": "",
+  "note": "",
+  "services": 3,
+  "last_triggered": 1687107601,
+  "owner": 1,
+  "triggers": {
+    "switch_triggers": [
+      {
+        "id": 103,
+        "homeegram_id": 1
+      }
+    ],
+    "time_triggers": [
+      {
+        "id": 160,
+        "homeegram_id": 1,
+        "dtstart": "20230618T190000Z",
+        "rrule": "FREQ=DAILY;INTERVAL=1;BYHOUR=19;BYMINUTE=0",
+        "next_invocation": "2023-06-19T19:00:00"
+      }
+    ],
+    "attribute_triggers": [],
+    "webhook_triggers": [],
+    "homeegram_triggers": [],
+    "celestial_triggers": [],
+    "plan_triggers": [],
+    "group_triggers": [],
+    "user_triggers": []
+  },
+  "conditions": {
+    "time_conditions": [],
+    "attribute_conditions": [],
+    "homeegram_conditions": [],
+    "celestial_conditions": [],
+    "plan_conditions": [],
+    "group_conditions": [],
+    "user_conditions": []
+  },
+  "actions": {
+    "attribute_actions": [
+      {
+        "id": 2,
+        "homeegram_id": 1,
+        "delay": 0,
+        "node_id": 2,
+        "attribute_id": 28,
+        "source_attribute_id": 0,
+        "value": 100.0,
+        "command": 1
+      },
+      {
+        "id": 16,
+        "homeegram_id": 1,
+        "delay": 0,
+        "node_id": 11,
+        "attribute_id": 123,
+        "source_attribute_id": 0,
+        "value": 100.0,
+        "command": 1
+      },
+      {
+        "id": 17,
+        "homeegram_id": 1,
+        "delay": 0,
+        "node_id": 15,
+        "attribute_id": 154,
+        "source_attribute_id": 0,
+        "value": 100.0,
+        "command": 1
+      },
+      {
+        "id": 271,
+        "homeegram_id": 1,
+        "delay": 0,
+        "node_id": 72,
+        "attribute_id": 697,
+        "source_attribute_id": 0,
+        "value": 100.0,
+        "command": 1
+      }
+    ],
+    "group_actions": [],
+    "tts_actions": [],
+    "notification_actions": [],
+    "webhook_actions": [],
+    "homeegram_actions": [],
+    "plan_actions": [],
+    "user_actions": []
+  }
+}
