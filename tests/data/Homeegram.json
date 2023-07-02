@@ -40,7 +40,18 @@
   },
   "conditions": {
     "time_conditions": [],
-    "attribute_conditions": [],
+    "attribute_conditions": [
+      {
+        "id": 48,
+        "homeegram_id": 5,
+        "node_id": -1,
+        "attribute_id": 1,
+        "operator": 1,
+        "check_moment": 1,
+        "operand": 1,
+        "value": 0.0
+      }
+    ],
     "homeegram_conditions": [],
     "celestial_conditions": [],
     "plan_conditions": [],

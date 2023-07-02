@@ -40,7 +40,7 @@
         }
     },
     "scripts": {
-        "test": "php vendor/bin/phpunit",
+        "test": "php vendor/bin/phpunit --exclude-group needs-homee-cube",
         "sniff": "php vendor/bin/phpcs",
         "phpstan": "php vendor/bin/phpstan analyse src tests --level 3"
     }

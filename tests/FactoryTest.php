@@ -3,12 +3,10 @@
 namespace HomeeApi\Tests;
 
 use DateTime;
-use HomeeApi\Entity\Group;
 use HomeeApi\Entity\Homeegram;
 use HomeeApi\Entity\Node;
 use HomeeApi\Entity\Node\NodeAttribute;
 use HomeeApi\Entity\Relationship;
-use HomeeApi\Entity\User;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
 
@@ -76,7 +74,7 @@ class FactoryTest extends TestCase
         $nodeAttribute->current_value = 100.0;
         $nodeAttribute->target_value = 100.0;
         $nodeAttribute->last_value = 100.0;
-        $nodeAttribute->unit = "%25";
+        $nodeAttribute->unit = "%";
         $nodeAttribute->step_value = 1.0;
         $nodeAttribute->editable = 0;
         $nodeAttribute->type = 8;
@@ -138,6 +136,8 @@ class FactoryTest extends TestCase
     }
 
     /**
+     * @covers \HomeeApi\Entity\Homeegram::factory
+     *
      * @throws ReflectionException
      */
     public function testHomeegramFactory()
@@ -172,6 +172,17 @@ class FactoryTest extends TestCase
         $timeTrigger->next_invocation = new DateTime('2023-06-19T19:00:00');
         $expected->triggers['time_triggers'][] = $timeTrigger;
 
+        $attributeCondition = new Homeegram\Condition\AttributeCondition();
+        $attributeCondition->id = 48;
+        $attributeCondition->homeegram_id = 5;
+        $attributeCondition->node_id = -1;
+        $attributeCondition->attribute_id = 1;
+        $attributeCondition->operator = 1;
+        $attributeCondition->check_moment = 1;
+        $attributeCondition->operand = 1;
+        $attributeCondition->value = 0.0;
+        $expected->conditions['attribute_conditions'][] = $attributeCondition;
+
         $attributeAction = new Homeegram\Action\AttributeAction();
         $attributeAction->id = 2;
         $attributeAction->homeegram_id = 1;
@@ -183,6 +194,7 @@ class FactoryTest extends TestCase
         $attributeAction->command = 1;
         $expected->actions['attribute_actions'][] = $attributeAction;
 
+        $attributeAction = new Homeegram\Action\AttributeAction();
         $attributeAction->id = 16;
         $attributeAction->homeegram_id = 1;
         $attributeAction->delay = 0;
@@ -193,6 +205,7 @@ class FactoryTest extends TestCase
         $attributeAction->command = 1;
         $expected->actions['attribute_actions'][] = $attributeAction;
 
+        $attributeAction = new Homeegram\Action\AttributeAction();
         $attributeAction->id = 17;
         $attributeAction->homeegram_id = 1;
         $attributeAction->delay = 0;
@@ -203,6 +216,7 @@ class FactoryTest extends TestCase
         $attributeAction->command = 1;
         $expected->actions['attribute_actions'][] = $attributeAction;
 
+        $attributeAction = new Homeegram\Action\AttributeAction();
         $attributeAction->id = 271;
         $attributeAction->homeegram_id = 1;
         $attributeAction->delay = 0;
@@ -213,11 +227,10 @@ class FactoryTest extends TestCase
         $attributeAction->command = 1;
         $expected->actions['attribute_actions'][] = $attributeAction;
 
+
         $json = file_get_contents(__DIR__ . '/data/Homeegram.json');
-        $actual = Relationship::factory($json);
+        $actual = Homeegram::factory($json);
 
         self::assertEquals($expected, $actual);
     }
-
-
 }
