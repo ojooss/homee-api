@@ -13,7 +13,7 @@ class NodeAttributeHandler implements MessageHandlerInterface
 
     public function getLogFile(): string
     {
-        return __DIR__ . '/NodeAttributeHandler.txt';
+        return __DIR__ . '/NodeAttributeHandler.log';
     }
 
     /**

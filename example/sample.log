@@ -1,7 +1,0 @@
-[2023-06-29T21:35:09.023312+02:00] MyLogger.INFO: startet sample.php [] []
-[2023-06-29T21:35:09.059440+02:00] MyLogger.DEBUG: HomeeApi: going to get new access token [] []
-[2023-06-29T21:35:09.438135+02:00] MyLogger.DEBUG: new access token {"token":"OWmOSLFkkfyHeqfWsg62FrWN8iAMDwGFNuxLW0JSfmUbIsZxLb6F4AWehevB1zJj","expiresAt":"2024-06-27 21:35:09"} []
-[2023-06-29T21:35:37.734838+02:00] MyLogger.INFO: startet sample.php [] []
-[2023-06-29T21:35:37.772238+02:00] MyLogger.DEBUG: HomeeApi: going to get new access token [] []
-[2023-06-29T21:35:38.161885+02:00] MyLogger.DEBUG: new access token {"token":"6i5tzKkk9B6vgWxQ6Jid3KtTuksO35aj3iY6ILcqF9c66QbicX70P2PJpaRTUFUZ","expiresAt":"2024-06-27 21:35:38"} []
-[2023-06-29T21:36:01.452283+02:00] MyLogger.INFO: HomeeApi: received message: {"attribute":{"id":396,"node_id":-1,"instance":0,"minimum":0,"maximum":100,"current_value":8.0,"target_value":8.0,"last_value":7.0,"unit":"%25","step_value":0.1,"editable":0,"type":312,"state":1,"last_changed":1688067361,"changed_by":1,"changed_by_id":0,"based_on":1,"data":"","name":"","options":{"history":{"day":1,"week":26,"month":6}}}} [] []
