@@ -1,6 +1,7 @@
 {
     "name": "ojooss/homee-api",
     "description": "package to interact with homee",
+    "version": "0.1.0",
     "keywords": ["homee-api","homee","api","smarthome","automation"],
     "readme": "README.md",
     "authors": [{"name": "Oliver Jooß"}],
