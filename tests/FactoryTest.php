@@ -4,9 +4,14 @@ namespace HomeeApi\Tests;
 
 use DateTime;
 use HomeeApi\Entity\Homeegram;
+use HomeeApi\Entity\Homeegram\Action\AttributeAction;
+use HomeeApi\Entity\Homeegram\Condition\AttributeCondition;
+use HomeeApi\Entity\Homeegram\Condition\GroupCondition;
+use HomeeApi\Entity\Homeegram\Condition\UserCondition;
+use HomeeApi\Entity\Homeegram\Trigger\SwitchTrigger;
+use HomeeApi\Entity\Homeegram\Trigger\TimeTrigger;
 use HomeeApi\Entity\Node;
 use HomeeApi\Entity\Node\NodeAttribute;
-use HomeeApi\Entity\Relationship;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
 
@@ -159,12 +164,29 @@ class FactoryTest extends TestCase
         $expected->last_triggered = (new DateTime())->setTimestamp(1687107601);
         $expected->owner = 1;
 
-        $switchTrigger = new Homeegram\Trigger\SwitchTrigger();
+        $attributeTrigger = new Homeegram\Trigger\AttributeTrigger();
+        $attributeTrigger->id = 161;
+        $attributeTrigger->homeegram_id = $expected->id;
+        $attributeTrigger->node_id = 53;
+        $attributeTrigger->attribute_id = 532;
+        $attributeTrigger->operator = 3;
+        $attributeTrigger->operand = 1;
+        $attributeTrigger->value = 0;
+        $expected->triggers['attribute_triggers'][] = $attributeTrigger;
+
+        $celestialTriggers = new Homeegram\Trigger\CelestialTrigger();
+        $celestialTriggers->id = 30;
+        $celestialTriggers->homeegram_id = $expected->id;
+        $celestialTriggers->celestial_type = 2;
+        $celestialTriggers->time_offset = -90;
+        $expected->triggers['celestial_triggers'][] = $celestialTriggers;
+
+        $switchTrigger = new SwitchTrigger();
         $switchTrigger->id = 103;
         $switchTrigger->homeegram_id = $expected->id;
         $expected->triggers['switch_triggers'][] = $switchTrigger;
 
-        $timeTrigger = new Homeegram\Trigger\TimeTrigger();
+        $timeTrigger = new TimeTrigger();
         $timeTrigger->id = 160;
         $timeTrigger->homeegram_id = $expected->id;
         $timeTrigger->dtstart = new DateTime('20230618T190000Z');
@@ -172,9 +194,15 @@ class FactoryTest extends TestCase
         $timeTrigger->next_invocation = new DateTime('2023-06-19T19:00:00');
         $expected->triggers['time_triggers'][] = $timeTrigger;
 
-        $attributeCondition = new Homeegram\Condition\AttributeCondition();
+        $webhookTrigger = new Homeegram\Trigger\WebhookTrigger();
+        $webhookTrigger->id = 124;
+        $webhookTrigger->homeegram_id = $expected->id;
+        $webhookTrigger->event = 'Push-Benachrichtigung';
+        $expected->triggers['webhook_triggers'][] = $webhookTrigger;
+
+        $attributeCondition = new AttributeCondition();
         $attributeCondition->id = 48;
-        $attributeCondition->homeegram_id = 5;
+        $attributeCondition->homeegram_id = $expected->id;
         $attributeCondition->node_id = -1;
         $attributeCondition->attribute_id = 1;
         $attributeCondition->operator = 1;
@@ -183,9 +211,34 @@ class FactoryTest extends TestCase
         $attributeCondition->value = 0.0;
         $expected->conditions['attribute_conditions'][] = $attributeCondition;
 
-        $attributeAction = new Homeegram\Action\AttributeAction();
+        $groupCondition = new GroupCondition();
+        $groupCondition->id = 48;
+        $groupCondition->homeegram_id = $expected->id;
+        $groupCondition->node_id = -1;
+        $groupCondition->attribute_id = 1;
+        $groupCondition->operator = 1;
+        $groupCondition->check_moment = 1;
+        $groupCondition->operand = 1;
+        $groupCondition->value = 0;
+        $expected->conditions['group_conditions'][] = $groupCondition;
+
+        $timeCondition = new Homeegram\Condition\TimeCondition();
+        $timeCondition->id = 47;
+        $timeCondition->homeegram_id = $expected->id;
+        $timeCondition->dtstart = new DateTime('20160127T133700Z');
+        $timeCondition->rrule = 'FREQ=DAILY;INTERVAL=1;BYHOUR=16;BYMINUTE=0';
+        $timeCondition->duration = 'PT12600S';
+        $timeCondition->check_moment = 1;
+        $expected->conditions['time_conditions'][] = $timeCondition;
+
+        $userCondition = new UserCondition();
+        $userCondition->id = 198;
+        $userCondition->homeegram_id = $expected->id;
+        $expected->conditions['user_conditions'][] = $userCondition;
+
+        $attributeAction = new AttributeAction();
         $attributeAction->id = 2;
-        $attributeAction->homeegram_id = 1;
+        $attributeAction->homeegram_id = $expected->id;
         $attributeAction->delay = 0;
         $attributeAction->node_id = 2;
         $attributeAction->attribute_id = 28;
@@ -194,9 +247,9 @@ class FactoryTest extends TestCase
         $attributeAction->command = 1;
         $expected->actions['attribute_actions'][] = $attributeAction;
 
-        $attributeAction = new Homeegram\Action\AttributeAction();
+        $attributeAction = new AttributeAction();
         $attributeAction->id = 16;
-        $attributeAction->homeegram_id = 1;
+        $attributeAction->homeegram_id = $expected->id;
         $attributeAction->delay = 0;
         $attributeAction->node_id = 11;
         $attributeAction->attribute_id = 123;
@@ -205,9 +258,9 @@ class FactoryTest extends TestCase
         $attributeAction->command = 1;
         $expected->actions['attribute_actions'][] = $attributeAction;
 
-        $attributeAction = new Homeegram\Action\AttributeAction();
+        $attributeAction = new AttributeAction();
         $attributeAction->id = 17;
-        $attributeAction->homeegram_id = 1;
+        $attributeAction->homeegram_id = $expected->id;
         $attributeAction->delay = 0;
         $attributeAction->node_id = 15;
         $attributeAction->attribute_id = 154;
@@ -216,9 +269,9 @@ class FactoryTest extends TestCase
         $attributeAction->command = 1;
         $expected->actions['attribute_actions'][] = $attributeAction;
 
-        $attributeAction = new Homeegram\Action\AttributeAction();
+        $attributeAction = new AttributeAction();
         $attributeAction->id = 271;
-        $attributeAction->homeegram_id = 1;
+        $attributeAction->homeegram_id = $expected->id;
         $attributeAction->delay = 0;
         $attributeAction->node_id = 72;
         $attributeAction->attribute_id = 697;
@@ -226,6 +279,52 @@ class FactoryTest extends TestCase
         $attributeAction->value = 100.0;
         $attributeAction->command = 1;
         $expected->actions['attribute_actions'][] = $attributeAction;
+
+#        $groupAction = new Homeegram\Action\GroupAction();
+#        $groupAction->
+#        $expected->actions['group_actions'][] = $groupAction;
+
+        $homeegramAction = new Homeegram\Action\HomeegramAction();
+        $homeegramAction->id = 247;
+        $homeegramAction->homeegram_id = $expected->id;
+        $homeegramAction->delay = 0;
+        $homeegramAction->target_homeegram_id = 85;
+        $homeegramAction->homeegram_event = 3;
+        $expected->actions['homeegram_actions'][] = $homeegramAction;
+
+        $notificationAction = new Homeegram\Action\NotificationAction();
+        $notificationAction->id = 181;
+        $notificationAction->homeegram_id = $expected->id;
+        $notificationAction->style = 1;
+        $notificationAction->delay = 0;
+        $notificationAction->critical = 0;
+        $notificationAction->user_ids = [8];
+        $notificationAction->message = 'Hallo Oliver';
+        $expected->actions['notification_actions'][] = $notificationAction;
+
+#        $ttsAction = new Homeegram\Action\TtsAction();
+#        $expected->actions['tts_actions'][] = $ttsAction;
+
+        $attributeAction = new Homeegram\Action\UserAction();
+        $attributeAction->id = 271;
+        $attributeAction->homeegram_id = $expected->id;
+        $attributeAction->delay = 5;
+        $attributeAction->node_id = 72;
+        $attributeAction->attribute_id = 491;
+        $attributeAction->source_attribute_id = 0;
+        $attributeAction->value = 0;
+        $attributeAction->command = 1;
+        $expected->actions['user_actions'][] = $attributeAction;
+
+        $attributeAction = new Homeegram\Action\WebhookAction();
+        $attributeAction->id = 280;
+        $attributeAction->homeegram_id = $expected->id;
+        $attributeAction->delay = 0;
+        $attributeAction->method = 'GET';
+        $attributeAction->url = 'http://192.168.21.202/station/7/play';
+        $attributeAction->body= "";
+        $attributeAction->content_type = "text/plain";
+        $expected->actions['webhook_actions'][] = $attributeAction;
 
 
         $json = file_get_contents(__DIR__ . '/data/Homeegram.json');

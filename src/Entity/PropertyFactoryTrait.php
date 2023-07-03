@@ -18,8 +18,12 @@ trait PropertyFactoryTrait
         $reflectionProperty = new \ReflectionProperty($node, $property);
         $propertyType = $reflectionProperty->getType()->getName();
         if ($propertyType == DateTimeInterface::class) {
-            $node->$property = new DateTime();
-            $node->$property->setTimestamp($value);
+            if (is_numeric($value)) {
+                $node->$property = new DateTime();
+                $node->$property->setTimestamp($value);
+            } else {
+                $node->$property = new DateTime($value);
+            }
         } elseif ($propertyType == 'int') {
             $node->$property = (int)$value;
         } elseif ($propertyType == 'float') {

@@ -30,20 +30,52 @@
         "next_invocation": "2023-06-19T19:00:00"
       }
     ],
-    "attribute_triggers": [],
-    "webhook_triggers": [],
+    "attribute_triggers": [
+      {
+        "id":  161,
+        "homeegram_id":  1,
+        "node_id":  53,
+        "attribute_id":  532,
+        "operator":  3,
+        "operand":  1,
+        "value":  0
+      }
+    ],
+    "webhook_triggers": [
+      {
+        "id": 124,
+        "homeegram_id": 1,
+        "event": "Push-Benachrichtigung"
+      }
+    ],
     "homeegram_triggers": [],
-    "celestial_triggers": [],
+    "celestial_triggers": [
+      {
+        "id": 30,
+        "homeegram_id": 1,
+        "celestial_type": 2,
+        "time_offset": -90
+      }
+    ],
     "plan_triggers": [],
     "group_triggers": [],
     "user_triggers": []
   },
   "conditions": {
-    "time_conditions": [],
+    "time_conditions": [
+      {
+        "id":  47,
+        "homeegram_id":  1,
+        "dtstart":  "20160127T133700Z",
+        "rrule":  "FREQ=DAILY;INTERVAL=1;BYHOUR=16;BYMINUTE=0",
+        "duration":  "PT12600S",
+        "check_moment":  1
+      }
+    ],
     "attribute_conditions": [
       {
         "id": 48,
-        "homeegram_id": 5,
+        "homeegram_id": 1,
         "node_id": -1,
         "attribute_id": 1,
         "operator": 1,
@@ -55,8 +87,24 @@
     "homeegram_conditions": [],
     "celestial_conditions": [],
     "plan_conditions": [],
-    "group_conditions": [],
-    "user_conditions": []
+    "group_conditions": [
+      {
+        "id":  48,
+        "homeegram_id":  1,
+        "node_id":  -1,
+        "attribute_id":  1,
+        "operator":  1,
+        "check_moment":  1,
+        "operand":  1,
+        "value":  0
+      }
+    ],
+    "user_conditions": [
+      {
+        "id":  198,
+        "homeegram_id":  1
+      }
+    ]
   },
   "actions": {
     "attribute_actions": [
@@ -101,12 +149,66 @@
         "command": 1
       }
     ],
-    "group_actions": [],
-    "tts_actions": [],
-    "notification_actions": [],
-    "webhook_actions": [],
-    "homeegram_actions": [],
-    "plan_actions": [],
-    "user_actions": []
+    "group_actions": [
+    ],
+    "tts_actions": [
+    ],
+    "notification_actions": [
+      {
+        "id": 181,
+        "homeegram_id": 1,
+        "style": 1,
+        "delay": 0,
+        "critical": 0,
+        "user_ids": [
+          8
+        ],
+        "message": "Hallo Oliver"
+      }
+    ],
+    "webhook_actions": [
+      {
+        "id":  280,
+        "homeegram_id":  1,
+        "delay":  0,
+        "method":  "GET",
+        "url":  "http%3A%2F%2F192.168.21.202%2Fstation%2F7%2Fplay",
+        "body": "",
+        "content_type":  "text%2Fplain"
+      }
+    ],
+    "homeegram_actions": [
+      {
+        "id":  247,
+        "homeegram_id": 1,
+        "delay":  0,
+        "target_homeegram_id":  85,
+        "homeegram_event":  3
+      }
+    ],
+    "plan_actions": [
+      {
+        "id":  284,
+        "homeegram_id":  1,
+        "delay":  5,
+        "node_id":  48,
+        "attribute_id":  491,
+        "source_attribute_id":  0,
+        "value":  0,
+        "command":  1
+      }
+    ],
+    "user_actions": [
+      {
+        "id": 271,
+        "homeegram_id": 1,
+        "delay": 5,
+        "node_id": 72,
+        "attribute_id": 491,
+        "source_attribute_id": 0,
+        "value": 0,
+        "command": 1
+      }
+    ]
   }
 }
