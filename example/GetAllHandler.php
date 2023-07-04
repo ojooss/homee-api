@@ -21,6 +21,8 @@ class GetAllHandler implements MessageHandlerInterface
         $payload = $message->getPayload();
         $data = json_decode($payload, true, 512, JSON_THROW_ON_ERROR);
 
+        file_put_contents(__DIR__ . '/raw.txt', print_r($data, true) . PHP_EOL, FILE_APPEND);
+
         if (isset($data['all'])) {
             $data = $data['all'];
         }
@@ -36,12 +38,16 @@ class GetAllHandler implements MessageHandlerInterface
                     );
                 }
             }
-
-            file_put_contents(
-                __DIR__ . '/raw.txt',
-                print_r($data, true) . PHP_EOL,
-                FILE_APPEND
-            );
+            if (isset($data['nodes'])) {
+                foreach ($data['nodes'] as $nodeData) {
+                    $homeegram = \HomeeApi\Entity\Node::factory($nodeData);
+                    file_put_contents(
+                        $logFile,
+                        print_r($homeegram, true) . PHP_EOL,
+                        FILE_APPEND
+                    );
+                }
+            }
 
         } catch (Exception $e) {
             file_put_contents(
