@@ -37,6 +37,7 @@
         "node_id":  53,
         "attribute_id":  532,
         "operator":  3,
+        "operand_id": 552,
         "operand":  1,
         "value":  0
       }

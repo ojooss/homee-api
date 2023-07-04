@@ -10,5 +10,6 @@ class AttributeTrigger
     public ?int $attribute_id = null;
     public ?int $operator = null;
     public ?int $operand = null;
+    public ?int $operand_id = null;
     public ?int $value = null;
 }

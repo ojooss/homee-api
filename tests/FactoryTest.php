@@ -171,6 +171,7 @@ class FactoryTest extends TestCase
         $attributeTrigger->attribute_id = 532;
         $attributeTrigger->operator = 3;
         $attributeTrigger->operand = 1;
+        $attributeTrigger->operand_id = 552;
         $attributeTrigger->value = 0;
         $expected->triggers['attribute_triggers'][] = $attributeTrigger;
 
