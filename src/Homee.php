@@ -258,7 +258,12 @@ class Homee
                 });
 
                 $conn->on('close', function ($code = null, $reason = null) {
-                    $this->logger?->info('HomeeApi: Connection closed (code: ' . $code . ' reason: ' . $reason . ')');
+                    // see: https://www.rfc-editor.org/rfc/rfc6455.html#section-7.4.1
+                    if ($code == 1000) {
+                        $this->logger?->info('HomeeApi: Connection closed normal (code: ' . $code . ')');
+                    } else {
+                        $this->logger?->error('HomeeApi: Connection closed (code: ' . $code . ' reason: ' . $reason . ')');
+                    }
                 });
 
                 $conn->send($command);
