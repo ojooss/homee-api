@@ -13,7 +13,7 @@ class Group
     use PropertyFactoryTrait;
 
     public ?int $id = null;
-    public ?swtring $name = null;
+    public ?string $name = null;
     public ?string $image = null;
     public ?int $order = null;
     public ?DateTimeInterface $added = null;
