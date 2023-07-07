@@ -349,4 +349,19 @@ class Homee
         }
         $this->sendCommand('PUT:/nodes/' . $deviceId . '/attributes/' . $attributeId . '?target_value=' . $value);
     }
+
+    public function playHomeegram(int $homeegramId): void
+    {
+        $this->sendCommand('PUT:homeegrams/' . $homeegramId . '?play=1');
+    }
+
+    public function activateHomeegram(int $homeegramId): void
+    {
+        $this->sendCommand('PUT:homeegrams/' . $homeegramId . '?active=1');
+    }
+
+    public function deactivateHomeegram(int $homeegramId): void
+    {
+        $this->sendCommand('PUT:homeegrams/' . $homeegramId . '?active=0');
+    }
 }
