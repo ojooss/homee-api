@@ -341,4 +341,12 @@ class Homee
     {
         $this->sendCommand('GET:relationships');
     }
+
+    public function setValue(int $deviceId, int $attributeId, int|float|string $value): void
+    {
+        if (is_string($value)) {
+            $value = urlencode($value);
+        }
+        $this->sendCommand('PUT:/nodes/' . $deviceId . '/attributes/' . $attributeId . '?target_value=' . $value);
+    }
 }
