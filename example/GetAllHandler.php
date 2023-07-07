@@ -48,7 +48,34 @@ class GetAllHandler implements MessageHandlerInterface
                     );
                 }
             }
-
+            if (isset($data['groups'])) {
+                foreach ($data['groups'] as $nodeData) {
+                    $homeegram = \HomeeApi\Entity\Group::factory($nodeData);
+                    file_put_contents(
+                        $logFile,
+                        print_r($homeegram, true) . PHP_EOL,
+                        FILE_APPEND
+                    );
+                }
+            }
+            if (isset($data['relationships'])) {
+                foreach ($data['relationships'] as $nodeData) {
+                    $homeegram = \HomeeApi\Entity\Relationship::factory($nodeData);
+                    file_put_contents(
+                        $logFile,
+                        print_r($homeegram, true) . PHP_EOL,
+                        FILE_APPEND
+                    );
+                }
+            }
+            if (isset($data['settings'])) {
+                $settings = \HomeeApi\Entity\Settings::factory($data['settings']);
+                file_put_contents(
+                    $logFile,
+                    print_r($settings, true) . PHP_EOL,
+                    FILE_APPEND
+                );
+            }
         } catch (Exception $e) {
             file_put_contents(
                 $logFile,
