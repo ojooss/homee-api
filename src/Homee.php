@@ -194,7 +194,7 @@ class Homee
         $expiresAt = new DateTime();
         $expiresAt->setTimestamp(time() + (int)$result['expires']);
         $expiresAt->modify('-1 day'); // safety first
-        $this->logger?->debug(
+        $this->logger?->info(
             'new access token',
             [
                 'token' => $this->accessToken,
@@ -294,7 +294,7 @@ class Homee
         ->then(
             function (WebSocket $conn) {
                 $conn->on('message', function (MessageInterface $msg) use ($conn) {
-                    $this->logger?->info('HomeeApi: received message: ' . $msg->getPayload());
+                    $this->logger?->debug('HomeeApi: received message: ' . $msg->getPayload());
                     foreach ($this->messageHandlers as $handler) {
                         $handler->handle($msg);
                     }
