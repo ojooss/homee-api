@@ -211,7 +211,7 @@ class Homee
     /**
      * @throws ResponseException
      */
-    public function getHomeeLog(): string
+    public function getHomeeLog(): array
     {
         $url = $this->getHttpUrl() . '/logfile.log';
         try {
@@ -231,7 +231,7 @@ class Homee
             );
             throw new ResponseException($response);
         }
-        return $response->getBody()->getContents();
+        return explode(PHP_EOL, $response->getBody()->getContents());
     }
 
 
