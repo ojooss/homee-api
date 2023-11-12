@@ -5,9 +5,9 @@ namespace HomeeApi\Tests;
 
 use HomeeApi\Exception\ResponseException;
 use HomeeApi\Homee;
+use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\TestCase;
 use Psr\Cache\InvalidArgumentException;
-use Psr\Log\LoggerInterface;
 use RuntimeException;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
@@ -16,6 +16,8 @@ use Symfony\Component\Cache\Adapter\FilesystemAdapter;
  */
 final class HomeeTest extends TestCase
 {
+    private ?FilesystemAdapter $cache = null;
+
     protected function getEnv($key): string
     {
         $value = getenv($key);
@@ -28,24 +30,30 @@ final class HomeeTest extends TestCase
     /**
      * @throws InvalidArgumentException
      * @throws ResponseException
+     * @throws Exception
      */
     private function getHomee(string $cacheItemKey = 'homee.access_token'): Homee
     {
-        $cache = new FilesystemAdapter();
-        $cacheItem = $cache->getItem($cacheItemKey);
-
-        $logger = $this->createMock(LoggerInterface::class);
+        // init cache once
+        if (null === $this->cache) {
+            $this->cache = new FilesystemAdapter();
+        }
 
         $homee = new Homee(
             $this->getEnv('HOMEE_HOST')
         );
-        $homee->setLogger($logger);
+        $cacheItem = $this->cache->getItem($cacheItemKey);
+        if ($cacheItem->isHit()) {
+            $homee->setAccessToken($cacheItem->get());
+        } else {
+            $homee->init(
+                $this->getEnv('HOMEE_USERNAME'),
+                $this->getEnv('HOMEE_PASSWORD'),
+                $cacheItem
+            );
+            $this->cache->save($cacheItem);
+        }
 
-        $homee->init(
-            $this->getEnv('HOMEE_USERNAME'),
-            $this->getEnv('HOMEE_PASSWORD'),
-            $cacheItem
-        );
         return $homee;
     }
 
@@ -53,6 +61,7 @@ final class HomeeTest extends TestCase
      * @covers \HomeeApi\Homee::init
      * @covers \HomeeApi\Homee::getAccessToken
      *
+     * @throws Exception
      * @throws InvalidArgumentException
      * @throws ResponseException
      */
@@ -63,14 +72,14 @@ final class HomeeTest extends TestCase
         // check access token
         self::assertNotEmpty($client->getAccessToken());
         // check cache item
-        $cache = new FilesystemAdapter();
-        $cacheItem = $cache->getItem($cacheItemKey);
+        $cacheItem = $this->cache->getItem($cacheItemKey);
         self::assertNotEmpty($cacheItem->get());
     }
 
     /**
      * @covers \HomeeApi\Homee::getHomeeLog
      *
+     * @throws Exception
      * @throws InvalidArgumentException
      * @throws ResponseException
      */
