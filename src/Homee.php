@@ -27,10 +27,7 @@ use React\EventLoop\Loop;
 class Homee
 {
 
-    private ?HttpClient $httpClient;
-    private ?LoggerInterface $logger;
     private ?string $accessToken = null;
-    private string $host;
     private string $deviceName = 'homeeApi';
 
     /**
@@ -39,14 +36,10 @@ class Homee
     private array $messageHandlers = [];
 
     public function __construct(
-        string           $host,
-        ?LoggerInterface $logger = null,
-        ?HttpClient $httpClient = null
-    )
-    {
-        $this->host = $host;
-        $this->logger = $logger;
-        $this->httpClient = $httpClient;
+        private readonly string $host,
+        private ?LoggerInterface $logger = null,
+        private ?HttpClient $httpClient = null
+    ) {
     }
 
     protected function getHttpUrl(): string
@@ -310,7 +303,7 @@ class Homee
                 });
 
             },
-            function (Exception $e) use ($loop) {
+            function (Exception $e) use ($loop): never {
                 $this->logger?->critical('HomeeApi: Could not connect: ' . $e->getMessage());
                 $loop->stop();
                 throw $e;

@@ -2,13 +2,15 @@
 
 namespace HomeeApi\Tests;
 
+use HomeeApi\CA\CA;
 use HomeeApi\CA\CADeviceType;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
+#[CoversClass(CA::class)]
 class CATest extends TestCase
 {
     /**
-     * @covers \HomeeApi\CA\CA::getValueByConst
      * @return void
      */
     public function testGet()
@@ -31,7 +33,5 @@ class CATest extends TestCase
             'Desktop',
             CADeviceType::getNameByValue(CADeviceType::CADeviceTypeDesktop)
         );
-
     }
-
 }

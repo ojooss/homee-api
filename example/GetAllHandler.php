@@ -1,5 +1,10 @@
 <?php
 
+use HomeeApi\Entity\Group;
+use HomeeApi\Entity\Homeegram;
+use HomeeApi\Entity\Node;
+use HomeeApi\Entity\Relationship;
+use HomeeApi\Entity\Settings;
 use HomeeApi\MessageHandlerInterface;
 use Ratchet\RFC6455\Messaging\MessageInterface;
 
@@ -30,7 +35,7 @@ class GetAllHandler implements MessageHandlerInterface
         try {
             if (isset($data['homeegrams'])) {
                 foreach ($data['homeegrams'] as $homeegramData) {
-                    $homeegram = \HomeeApi\Entity\Homeegram::factory($homeegramData);
+                    $homeegram = Homeegram::factory($homeegramData);
                     file_put_contents(
                         $logFile,
                         print_r($homeegram, true) . PHP_EOL,
@@ -40,7 +45,7 @@ class GetAllHandler implements MessageHandlerInterface
             }
             if (isset($data['nodes'])) {
                 foreach ($data['nodes'] as $nodeData) {
-                    $homeegram = \HomeeApi\Entity\Node::factory($nodeData);
+                    $homeegram = Node::factory($nodeData);
                     file_put_contents(
                         $logFile,
                         print_r($homeegram, true) . PHP_EOL,
@@ -50,7 +55,7 @@ class GetAllHandler implements MessageHandlerInterface
             }
             if (isset($data['groups'])) {
                 foreach ($data['groups'] as $nodeData) {
-                    $homeegram = \HomeeApi\Entity\Group::factory($nodeData);
+                    $homeegram = Group::factory($nodeData);
                     file_put_contents(
                         $logFile,
                         print_r($homeegram, true) . PHP_EOL,
@@ -60,7 +65,7 @@ class GetAllHandler implements MessageHandlerInterface
             }
             if (isset($data['relationships'])) {
                 foreach ($data['relationships'] as $nodeData) {
-                    $homeegram = \HomeeApi\Entity\Relationship::factory($nodeData);
+                    $homeegram = Relationship::factory($nodeData);
                     file_put_contents(
                         $logFile,
                         print_r($homeegram, true) . PHP_EOL,
@@ -69,7 +74,7 @@ class GetAllHandler implements MessageHandlerInterface
                 }
             }
             if (isset($data['settings'])) {
-                $settings = \HomeeApi\Entity\Settings::factory($data['settings']);
+                $settings = Settings::factory($data['settings']);
                 file_put_contents(
                     $logFile,
                     print_r($settings, true) . PHP_EOL,

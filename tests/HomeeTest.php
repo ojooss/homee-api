@@ -5,15 +5,15 @@ namespace HomeeApi\Tests;
 
 use HomeeApi\Exception\ResponseException;
 use HomeeApi\Homee;
-use PHPUnit\Framework\MockObject\Exception;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use Psr\Cache\InvalidArgumentException;
 use RuntimeException;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
-/**
- * @group needs-homee-cube
- */
+#[Group('needs-homee-cube')]
+#[CoversClass(Homee::class)]
 final class HomeeTest extends TestCase
 {
     private ?FilesystemAdapter $cache = null;
@@ -28,9 +28,10 @@ final class HomeeTest extends TestCase
     }
 
     /**
+     * @param string $cacheItemKey
+     * @return Homee
      * @throws InvalidArgumentException
      * @throws ResponseException
-     * @throws Exception
      */
     private function getHomee(string $cacheItemKey = 'homee.access_token'): Homee
     {
@@ -58,10 +59,6 @@ final class HomeeTest extends TestCase
     }
 
     /**
-     * @covers \HomeeApi\Homee::init
-     * @covers \HomeeApi\Homee::getAccessToken
-     *
-     * @throws Exception
      * @throws InvalidArgumentException
      * @throws ResponseException
      */
@@ -77,9 +74,6 @@ final class HomeeTest extends TestCase
     }
 
     /**
-     * @covers \HomeeApi\Homee::getHomeeLog
-     *
-     * @throws Exception
      * @throws InvalidArgumentException
      * @throws ResponseException
      */

@@ -12,16 +12,17 @@ use HomeeApi\Entity\Homeegram\Trigger\SwitchTrigger;
 use HomeeApi\Entity\Homeegram\Trigger\TimeTrigger;
 use HomeeApi\Entity\Node;
 use HomeeApi\Entity\Node\NodeAttribute;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
 
+#[CoversClass(Node::class)]
+#[CoversClass(NodeAttribute::class)]
+#[CoversClass(Homeegram::class)]
 class FactoryTest extends TestCase
 {
 
     /**
-     * @covers \HomeeApi\Entity\Node::factory
-     * @covers \HomeeApi\Entity\NodeAttribute::factory
-     *
      * @return void
      * @throws ReflectionException
      */
@@ -141,8 +142,6 @@ class FactoryTest extends TestCase
     }
 
     /**
-     * @covers \HomeeApi\Entity\Homeegram::factory
-     *
      * @throws ReflectionException
      */
     public function testHomeegramFactory()

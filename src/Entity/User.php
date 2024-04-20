@@ -1,12 +1,12 @@
-<?php /** @noinspection DuplicatedCode */
+<?php /** @noinspection PhpUnused */
+
+/** @noinspection DuplicatedCode */
 
 namespace HomeeApi\Entity;
 
-use DateTime;
 use DateTimeInterface;
 use Exception;
 use ReflectionException;
-use ReflectionProperty;
 
 class User
 {

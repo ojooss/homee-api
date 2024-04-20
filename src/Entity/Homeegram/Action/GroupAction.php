@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection PhpUnused */
 
 namespace HomeeApi\Entity\Homeegram\Action;
 

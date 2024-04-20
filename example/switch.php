@@ -1,5 +1,10 @@
 <?php
 
+use HomeeApi\Homee;
+use Monolog\Handler\StreamHandler;
+use Monolog\Level;
+use Monolog\Logger;
+
 require_once __DIR__ . '/../vendor/autoload.php';
 
 require_once __DIR__ . '/RawHandler.php';
@@ -8,12 +13,12 @@ echo "****************************************************" . PHP_EOL;
 echo "***     Trigger Homee to change switch state     ***" . PHP_EOL;
 echo "****************************************************" . PHP_EOL;
 
-$logger = new \Monolog\Logger('MyLogger');
-$streamHandler = new \Monolog\Handler\StreamHandler(__DIR__ . '/sample.log', \Monolog\Level::Debug);
+$logger = new Logger('MyLogger');
+$streamHandler = new StreamHandler(__DIR__ . '/sample.log', Level::Debug);
 $logger->pushHandler($streamHandler);
 $logger->info('startet ' . basename(__FILE__));
 
-$homee = new \HomeeApi\Homee(getenv('HOMEE_HOST'), $logger);
+$homee = new Homee(getenv('HOMEE_HOST'), $logger);
 $homee->setDeviceName('tmp');
 
 echo " [i] init connection" . PHP_EOL;

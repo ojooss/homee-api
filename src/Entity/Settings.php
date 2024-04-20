@@ -1,10 +1,9 @@
-<?php
+<?php /** @noinspection PhpUnused */
 
 namespace HomeeApi\Entity;
 
 use DateTimeInterface;
 use Exception;
-use HomeeApi\Entity\Node\NodeAttribute;
 use ReflectionException;
 
 class Settings

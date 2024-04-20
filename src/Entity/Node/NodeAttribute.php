@@ -34,6 +34,11 @@ class NodeAttribute
     public ?string $name = null;
     public ?array $options = null;
 
+    public ?string $type_label = null;
+    public ?string $state_label = null;
+    public ?string $changed_by_label = null;
+    public ?string $based_on_label = null;
+
     /**
      * @throws ReflectionException
      * @throws Exception

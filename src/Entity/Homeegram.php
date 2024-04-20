@@ -2,7 +2,6 @@
 
 namespace HomeeApi\Entity;
 
-use DateTime;
 use DateTimeInterface;
 use Exception;
 use HomeeApi\Entity\Homeegram\Action\AttributeAction;

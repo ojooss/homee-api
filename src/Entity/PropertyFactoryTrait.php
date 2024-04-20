@@ -4,18 +4,21 @@ namespace HomeeApi\Entity;
 
 use DateTime;
 use DateTimeInterface;
+use Exception;
 use ReflectionException;
+use ReflectionProperty;
 
 trait PropertyFactoryTrait
 {
 
     /**
      * @throws ReflectionException
+     * @throws Exception
      */
-    protected static function setProperty(object &$node, string $property, $value): void
+    protected static function setProperty(object $node, string $property, $value): void
     {
         /** @noinspection DuplicatedCode */
-        $reflectionProperty = new \ReflectionProperty($node, $property);
+        $reflectionProperty = new ReflectionProperty($node, $property);
         $propertyType = $reflectionProperty->getType()->getName();
         if ($propertyType == DateTimeInterface::class) {
             if (is_numeric($value)) {
@@ -29,10 +32,9 @@ trait PropertyFactoryTrait
         } elseif ($propertyType == 'float') {
             $node->$property = (float)$value;
         } elseif ($propertyType == 'string') {
-            $node->$property = urldecode($value);
+            $node->$property = urldecode((string) $value);
         } else {
             $node->$property = $value;
         }
     }
-
 }
